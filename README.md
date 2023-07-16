@@ -36,6 +36,10 @@ For example using the data we provide:
 ./build/demo ../model/model.param ../model/model.bin ../assets/nyu_snippet.mp4
 ```
 
+You should see the following output from the NYU sequence snippet:
+
+<img src="assets/demo.gif" width="260">
+
 ## 4. Examples 
 
 
