@@ -42,4 +42,25 @@ You should see the following output from the NYU sequence snippet:
 
 ## 4. Examples 
 
+### Dynamic lighting
+
+The left is ours and the right is the original optical flow algorithm.
+
+<table><tr>
+<td><img src=assets/3.png border=0 width="260"></td>
+<td><img src=assets/4.png border=0 width="260"></td>
+</tr></table>
+
+### Underwater
+
+The left is ours and the right is the original optical flow algorithm.
+
+<table><tr>
+<td><img src=assets/1.png border=0 width="260"></td>
+<td><img src=assets/2.png border=0 width="260"></td>
+</tr></table>
+
+### Active light source
+
+TODO 
 
