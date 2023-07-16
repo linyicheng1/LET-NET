@@ -62,5 +62,10 @@ The left is ours and the right is the original optical flow algorithm.
 
 ### Active light source
 
-TODO 
+The left is ours and the right is the original optical flow algorithm.
+
+<table><tr>
+<td><img src=assets/7.png border=0 width="260"></td>
+<td><img src=assets/8.png border=0 width="260"></td>
+</tr></table>
 
