@@ -68,7 +68,7 @@ std::vector<cv::Point2f> corner_tracking::extractFeature(
         const std::vector<cv::Point2f>& vcurkps)
 {
     if (score.empty()) {
-        return {};
+        return std::vector<cv::Point2f>();
     }
 
     size_t ncols = score.cols;
