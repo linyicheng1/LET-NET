@@ -115,13 +115,13 @@ int main(int argc, char** argv) {
         std::cout<<"time_used 3 : "<<time_used_3.count()*1000<<"ms"<<std::endl;
 
         //////////////////////////  show result  //////////////////////////
-//        cv::Mat new_desc = desc.clone();
-//        tracker.update(score, new_desc);
-//        tracker.show(frame);
-//        if (is_video) {
-//            writer << frame;
-//        }
-//        cv::waitKey(500);
+        cv::Mat new_desc = desc.clone();
+        tracker.update(score, new_desc);
+        tracker.show(frame);
+        if (is_video) {
+            writer << frame;
+        }
+        cv::waitKey(500);
     }
     writer.release();
     capture.release();
