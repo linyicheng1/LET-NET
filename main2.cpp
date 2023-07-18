@@ -27,28 +27,25 @@ int main()
 			cout<<"images input error! check please."<<endl;
 		}
 		cv::resize(image, image, cv::Size(640, 480), 0, 0);
-		// cv::cvtColor(image,image,cv::COLOR_RGB2BGR);
 		net.Inference(image);  //推理
 		auto hotmap = net.GetScoresValue();
-		auto Descriptors = net.GetDescriptorsValueOnly();
+		auto descriptors = net.GetDescriptorsValueOnly();
 		hotmap->host<float>();
 		vector<int> hotmap_shape(hotmap->shape()); //获取维度
 	
 		const float* hotmapIndex = (const float*) hotmap->buffer().host;
 		// hotmap可视化：其实也显示不出来啥，就几个分布的亮点。
 		cv::Mat hotPic(cv::Size(640,480), CV_8UC1,cv::Scalar(0));
-		cout<<"shape1 : "<<hotPic.size[0]<<" "<<hotPic.size[1]<<endl;
 		int imag_w = hotPic.size[1];
 		for(int i = 0 ; i<hotPic.size[0] ;++i){
 			for(int j = 0 ; j<hotPic.size[1] ; ++j){
 				hotPic.at<uchar>(i,j) = hotmapIndex[i*imag_w+j]*255;
 			}
 		}
-		cv::imshow("2",hotPic);
-
-		const float* DescriptorsIndex = (const float*) Descriptors->buffer().host;
+		// cv::imshow("2",hotPic);
+		const float* DescriptorsIndex = (const float*) descriptors->buffer().host;
 		cv::Mat Des(cv::Size(640,480), CV_8UC3,cv::Scalar(0));
-		cout<<"shape1 : "<<Des.size[0]<<" "<<Des.size[1]<<endl;
+		// cout<<"shape1 : "<<Des.size[0]<<" "<<Des.size[1]<<endl;
 		imag_w = Des.size[1];
 		for(int i = 0 ; i<Des.size[0] ;++i){
 			for(int j = 0 ; j<Des.size[1] ; j+=3){
@@ -57,10 +54,8 @@ int main()
 				                                   DescriptorsIndex[i*imag_w+j+614400]*255);
 			}
 		}
-		
-		
-		cv::imshow("4",Des);
-		cv::imshow("input", image);
-		cv::waitKey(20);
+		// cv::imshow("4",Des);
+		// cv::imshow("input", image);
+		cv::waitKey(10);
 	}
 }

@@ -6,11 +6,11 @@ Net::~Net(){};
 
 Net::Net(const char* modelPath){
     this->net = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
-    this->backendConfig.precision =MNN::BackendConfig::Precision_Normal;
+    this->backendConfig.precision =MNN::BackendConfig::Precision_High;
     this->backendConfig.power = MNN::BackendConfig::Power_Normal;
-    this->backendConfig.memory = MNN::BackendConfig::Memory_Normal;
+    this->backendConfig.memory = MNN::BackendConfig::Memory_High;
     this->config.backendConfig = & this->backendConfig;
-	this->config.mode = MNN_GPU_TUNING_FAST | MNN_GPU_MEMORY_IMAGE;
+	this->config.mode = MNN_GPU_TUNING_NORMAL | MNN_GPU_MEMORY_IMAGE;
     this->config.type = MNN_FORWARD_OPENCL;
     this->session = this->net->createSession(this->config);
 }
