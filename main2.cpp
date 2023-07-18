@@ -3,10 +3,11 @@
 #include<MNN/ImageProcess.hpp>
 #include "opencv2/opencv.hpp"
 #include "net.hpp"
+#include "tic_toc.h"
 using namespace  std;
 int main()
 {
-	const char* superpoint_model_name = "../model/mnn/model230717.mnn";
+	const char* superpoint_model_name = "../model/mnn/model640*480.mnn";
 	cout<<"load model from "<<superpoint_model_name<<endl;
 	Net net = Net(superpoint_model_name);
 	shared_ptr<MNN::Tensor> descFinalTensor1;
@@ -27,12 +28,13 @@ int main()
 			cout<<"images input error! check please."<<endl;
 		}
 		cv::resize(image, image, cv::Size(640, 480), 0, 0);
+		TicToc a;
 		net.Inference(image);  //推理
 		auto hotmap = net.GetScoresValue();
 		auto descriptors = net.GetDescriptorsValueOnly();
 		hotmap->host<float>();
 		vector<int> hotmap_shape(hotmap->shape()); //获取维度
-	
+		
 		const float* hotmapIndex = (const float*) hotmap->buffer().host;
 		// hotmap可视化：其实也显示不出来啥，就几个分布的亮点。
 		cv::Mat hotPic(cv::Size(640,480), CV_8UC1,cv::Scalar(0));
@@ -54,6 +56,7 @@ int main()
 				                                   DescriptorsIndex[i*imag_w+j+614400]*255);
 			}
 		}
+		std::cout <<" ======================="<<  a.toc() <<std::endl;
 		// cv::imshow("4",Des);
 		// cv::imshow("input", image);
 		cv::waitKey(10);
