@@ -7,7 +7,7 @@ LET-NET implements an extremely lightweight network for feature point extraction
 
 - OpenCV (https://docs.opencv.org/3.4/d7/d9f/tutorial_linux_install.html)
 - ncnn (https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-linux)
-
+- mnn  (https://mnn-docs.readthedocs.io/en/latest/index.html)
 > Notes: After installing ncnn, you need to change the path in CMakeLists.txt
 
 ```
