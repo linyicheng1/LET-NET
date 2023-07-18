@@ -1,9 +1,8 @@
 #include "net.hpp"
 #include "common.hpp"
-#include <fstream>
-Net::Net(){};
-Net::~Net(){};
-
+#include <memory>
+Net::Net()= default;
+Net::~Net()= default;
 Net::Net(const char* modelPath){
     this->net = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
     this->backendConfig.precision =MNN::BackendConfig::Precision_High;
@@ -15,24 +14,22 @@ Net::Net(const char* modelPath){
     this->session = this->net->createSession(this->config);
 }
 void Net::Mat2Tensor(const cv::Mat& image){
-	std::cout <<image.size() <<"  "<<image.channels() <<std::endl;
-    cv::Mat preImage = image.clone();
-    preImage.convertTo(preImage,CV_32FC3,1/255.);
+    cv::Mat pre_image = image.clone();
+    pre_image.convertTo(pre_image,CV_32FC3,1/255.);
     std::vector<cv::Mat> bgrChannels(3);
-    cv::split(preImage, bgrChannels); //bgrChannels会根据实际通道数自己调整。
-    std::vector<float> chwImage;
+    cv::split(pre_image, bgrChannels);
+    std::vector<float> chw_image;
     for (auto i = 0; i < bgrChannels.size(); i++)
     {  
         //HWC->CHW
-        std::vector<float> data = std::vector<float>(bgrChannels[i].reshape(1, preImage.cols * preImage.rows));
-        chwImage.insert(chwImage.end(), data.begin(), data.end());
+        std::vector<float> data = std::vector<float>(bgrChannels[i].reshape(1, pre_image.cols * pre_image.rows));
+        chw_image.insert(chw_image.end(), data.begin(), data.end());
     }
-    auto inTensor = net->getSessionInput(session, NULL);
-	// inTensor->printShape();
-    auto nchwTensor = shared_ptr<MNN::Tensor> (new MNN::Tensor(inTensor, MNN::Tensor::CAFFE));
-    ::memcpy(nchwTensor->host<float>(), chwImage.data(), nchwTensor->elementSize() * 4);
-    const float* hmap = (const float*)(nchwTensor->buffer().host);
-    inTensor->copyFromHostTensor(nchwTensor.get());
+    auto in_tensor = net->getSessionInput(session, NULL);;
+    auto nchw_tensor = std::make_shared<MNN::Tensor> (in_tensor, MNN::Tensor::CAFFE);
+    ::memcpy(nchw_tensor->host<float>(), chw_image.data(), nchw_tensor->elementSize() * 4);
+    // const auto* hmap = (const float*)(nchw_tensor->buffer().host);
+    in_tensor->copyFromHostTensor(nchw_tensor.get());
 }
 void Net::Inference(const cv::Mat& image){
      Mat2Tensor(image);
@@ -40,13 +37,13 @@ void Net::Inference(const cv::Mat& image){
  }
 shared_ptr<MNN::Tensor> Net::GetScoresValue(){
     auto output= this->net->getSessionOutput(this->session, this->scoresOutName.c_str());
-    auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
-    output->copyToHostTensor(outputTensor.get());
-    return outputTensor; 
+    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
+    output->copyToHostTensor(output_tensor.get());
+    return output_tensor;
 }
 shared_ptr<MNN::Tensor> Net::GetDescriptorsValueOnly(){
      auto output= this->net->getSessionOutput(this->session, this->descriptorsOutName.c_str());
-    auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
-    output->copyToHostTensor(outputTensor.get());
-    return outputTensor; 
+    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
+    output->copyToHostTensor(output_tensor.get());
+    return output_tensor;
 }
