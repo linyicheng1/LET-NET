@@ -1,7 +1,8 @@
 #include "net.hpp"
 #include <memory>
-Net::Net()= default;
+Net::Net(){};
 Net::~Net()= default;
+
 Net::Net(const char* modelPath){
     this->net = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
     this->backendConfig.precision =MNN::BackendConfig::Precision_High;
@@ -17,16 +18,16 @@ void Net::Mat2Tensor(const cv::Mat& image){
     pre_image.convertTo(pre_image,CV_32FC3,1/255.);
     std::vector<cv::Mat> bgrChannels(3);
     cv::split(pre_image, bgrChannels);
-    std::vector<float> chw_image;
+    std::vector<float> chwImage;
     for (auto i = 0; i < bgrChannels.size(); i++)
     {  
         //HWC->CHW
         std::vector<float> data = std::vector<float>(bgrChannels[i].reshape(1, pre_image.cols * pre_image.rows));
-        chw_image.insert(chw_image.end(), data.begin(), data.end());
+        chwImage.insert(chwImage.end(), data.begin(), data.end());
     }
     auto in_tensor = net->getSessionInput(session, NULL);;
     auto nchw_tensor = std::make_shared<MNN::Tensor> (in_tensor, MNN::Tensor::CAFFE);
-    ::memcpy(nchw_tensor->host<float>(), chw_image.data(), nchw_tensor->elementSize() * 4);
+    ::memcpy(nchw_tensor->host<float>(), chwImage.data(), nchw_tensor->elementSize() * 4);
     // const auto* hmap = (const float*)(nchw_tensor->buffer().host);
     in_tensor->copyFromHostTensor(nchw_tensor.get());
 }
