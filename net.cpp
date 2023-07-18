@@ -14,7 +14,6 @@ Net::Net(const char* modelPath){
     this->config.type = MNN_FORWARD_OPENCL;
     this->session = this->net->createSession(this->config);
 }
-
 void Net::Mat2Tensor(const cv::Mat& image){
 	std::cout <<image.size() <<"  "<<image.channels() <<std::endl;
     cv::Mat preImage = image.clone();
@@ -35,64 +34,19 @@ void Net::Mat2Tensor(const cv::Mat& image){
     const float* hmap = (const float*)(nchwTensor->buffer().host);
     inTensor->copyFromHostTensor(nchwTensor.get());
 }
-
 void Net::Inference(const cv::Mat& image){
      Mat2Tensor(image);
      this->net->runSession(this->session);
  }
-
 shared_ptr<MNN::Tensor> Net::GetScoresValue(){
     auto output= this->net->getSessionOutput(this->session, this->scoresOutName.c_str());
     auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
     output->copyToHostTensor(outputTensor.get());
     return outputTensor; 
 }
-
-shared_ptr<MNN::Tensor> Net::GetKeypointsValue(){
-    auto output= this->net->getSessionOutput(this->session, this->keypointsOutName.c_str());
-    auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
-    output->copyToHostTensor(outputTensor.get());
-    return outputTensor; 
-}
-
-shared_ptr<MNN::Tensor> Net::GetDescriptorsValue(){
-    auto keypoints = this->GetKeypointsValue();
-    auto scores =  this->GetScoresValue();
-    int realDim = this->GetRealDim(scores->host<float>());
-    this->realDim = realDim;
-    auto output= this->net->getSessionOutput(this->session, this->descriptorsOutName.c_str());
-    auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
-    output->copyToHostTensor(outputTensor.get());
-    std::vector<int> inputDims{1,256,realDim};
-    auto descFinalTensor = (shared_ptr<MNN::Tensor>) MNN::Tensor::create<float>(inputDims, NULL, MNN::Tensor::CAFFE);
-    auto descFinalOutput = sample_descriptors(keypoints->host<float>(),outputTensor->host<float>(),outputTensor->shape(),realDim,8);
-    ::memcpy(descFinalTensor->host<float>(),descFinalOutput.get(),descFinalTensor->elementSize() * 4);
-    return descFinalTensor;
-}
-
-// gao test
 shared_ptr<MNN::Tensor> Net::GetDescriptorsValueOnly(){
      auto output= this->net->getSessionOutput(this->session, this->descriptorsOutName.c_str());
     auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
     output->copyToHostTensor(outputTensor.get());
     return outputTensor; 
-}
-
-shared_ptr<MNN::Tensor> Net::GetAllValue(){
-    auto output= this->net->getSessionOutputAll(this->session);
-    shared_ptr<MNN::Tensor> outputTensor;
-    for(auto it:output){
-        outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(it.second, MNN::Tensor::CAFFE));
-        cout<<"it .first string: "<<it.first<<endl;
-        cout<<"it second shape: "<<endl;
-        // it.second->print();
-        it.second->printShape();
-    }
-    // auto outputTensor = shared_ptr<MNN::Tensor>(new MNN::Tensor(output, MNN::Tensor::CAFFE));
-    // output->copyToHostTensor(outputTensor.get());
-    return outputTensor; 
-}
-
-int Net::GetRealDim(float* scores){
-    return getRealDim(scores);
 }

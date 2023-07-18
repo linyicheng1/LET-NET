@@ -1,5 +1,4 @@
 #include "iostream"
-#include<MNN/Interpreter.hpp>
 #include<MNN/ImageProcess.hpp>
 #include "opencv2/opencv.hpp"
 #include "net.hpp"
@@ -8,10 +7,7 @@ using namespace  std;
 int main()
 {
 	const char* superpoint_model_name = "../model/mnn/model640*480.mnn";
-	cout<<"load model from "<<superpoint_model_name<<endl;
 	Net net = Net(superpoint_model_name);
-	shared_ptr<MNN::Tensor> descFinalTensor1;
-	vector<pair<int,int>> keyPsVecs1;
 	cv::VideoCapture cap;   //声明相机捕获对象
 	cap.open(0); //打开相机
 	if (!cap.isOpened()) //判断相机是否打开
@@ -24,9 +20,9 @@ int main()
 	{
 		cap >> img; //以流形式捕获图像
 		cv::Mat image = img;
-		if (image.empty()){
+		if (image.empty())
 			cout<<"images input error! check please."<<endl;
-		}
+		
 		cv::resize(image, image, cv::Size(640, 480), 0, 0);
 		TicToc a;
 		net.Inference(image);  //推理
