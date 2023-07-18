@@ -1,5 +1,4 @@
 #include "net.hpp"
-#include "common.hpp"
 #include <memory>
 Net::Net()= default;
 Net::~Net()= default;
@@ -35,13 +34,13 @@ void Net::Inference(const cv::Mat& image){
      Mat2Tensor(image);
      this->net->runSession(this->session);
  }
-shared_ptr<MNN::Tensor> Net::GetScoresValue(){
+std::shared_ptr<MNN::Tensor> Net::GetScoresValue(){
     auto output= this->net->getSessionOutput(this->session, this->scoresOutName.c_str());
     auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
     output->copyToHostTensor(output_tensor.get());
     return output_tensor;
 }
-shared_ptr<MNN::Tensor> Net::GetDescriptorsValueOnly(){
+std::shared_ptr<MNN::Tensor> Net::GetDescriptorsValueOnly(){
      auto output= this->net->getSessionOutput(this->session, this->descriptorsOutName.c_str());
     auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
     output->copyToHostTensor(output_tensor.get());

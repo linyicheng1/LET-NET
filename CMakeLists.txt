@@ -10,7 +10,7 @@ set(MNN "/home/moi/APP/include/mnn" CACHE STRING "MNN library path")
 include_directories(${MNN}/include)
 link_directories(${MNN}/lib)
 
-add_executable(demo main2.cpp tracking.cpp net.cpp common.cpp)
+add_executable(demo main2.cpp tracking.cpp net.cpp )
 target_link_libraries(demo
         MNN
         MNN_Express
