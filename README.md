@@ -8,6 +8,8 @@ LET-NET implements an extremely lightweight network for feature point extraction
   <a href="https://www.bilibili.com/video/BV1gz4y1V77M/?vd_source=4dd69fa6d40221a0fa0733def5c4708a#reply576226249"><img src="assets/bilibili.png" width=30% /></a>
 </div>
 
+## News 
+[VINS-Mono](https://github.com/linyicheng1/LET-NET/blob/main/assets/VINS-Mono.zip) Demo run on UMA-VI dataset is released.
 
 ## 1. Prerequisites 
 
