@@ -3,9 +3,9 @@
 LET-NET implements an extremely lightweight network for feature point extraction and image consistency computation. The network can process a 240 x 320 image on a CPU in about 5ms. Combined with LK optical flow, it breaks the assumption of brightness consistency and performs well on dynamic lighting as well as blurred images.
 
 <div display:inline>
-  <img src="assets/bilibili3.png" width=30% />
-  <img src="assets/bilibili2.png" width=30% />
-  <img src="assets/bilibili.png" width=30% />
+  <a href="https://www.bilibili.com/video/BV1gz4y1V77M/?vd_source=4dd69fa6d40221a0fa0733def5c4708a#reply576226249"><img src="assets/bilibili3.png" width=30% /></a>
+  <a href="https://www.bilibili.com/video/BV1gz4y1V77M/?vd_source=4dd69fa6d40221a0fa0733def5c4708a#reply576226249"><img src="assets/bilibili2.png" width=30% /></a>
+  <a href="https://www.bilibili.com/video/BV1gz4y1V77M/?vd_source=4dd69fa6d40221a0fa0733def5c4708a#reply576226249"><img src="assets/bilibili.png" width=30% /></a>
 </div>
 
 
