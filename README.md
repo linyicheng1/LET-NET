@@ -12,7 +12,7 @@ LET-NET implements an extremely lightweight network for feature point extraction
 1. [LET-VINS](https://github.com/linyicheng1/LET-NET/blob/main/assets/VINS-Mono.zip) Demo run on UMA-VI dataset is released.
 2. Our proposed LET-VINS won the second place in the VIO track of the ICCV2023SLAM Challenge, which is the best performance among the traditional methods.
 
-<img src=https://github.com/linyicheng1/LET-NET/assets/50650063/f4e96620-925e-4ff8-a2a9-c8af202c3b99 border=10 width=30%>
+<img src=https://github.com/linyicheng1/LET-NET/assets/50650063/f4e96620-925e-4ff8-a2a9-c8af202c3b99 border=10 width=40%>
 
 
 ## 1. Prerequisites 
