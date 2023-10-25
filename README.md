@@ -11,9 +11,13 @@ LET-NET implements an extremely lightweight network for feature point extraction
 ## News 
 1. [LET-VINS](https://github.com/linyicheng1/LET-NET/blob/main/assets/VINS-Mono.zip) Demo run on UMA-VI dataset is released.
 2. Our proposed LET-VINS won the second place in the VIO track of the ICCV2023SLAM Challenge, which is the best performance among the traditional methods.
+3. The preprinted paper was posted at [here](https://arxiv.org/abs/2310.15655).
 
 <img src=https://github.com/linyicheng1/LET-NET/assets/50650063/f4e96620-925e-4ff8-a2a9-c8af202c3b99 border=10 width=40%>
 
+## Related Paper
+
+- **Breaking of brightness consistency in optical flow with a lightweight CNN network**,Yicheng Lin, Shuo Wang, Yunlong Jiang, Bin Han, arXiv:2310.15655, [pdf](https://arxiv.org/pdf/2310.15655.pdf) 
 
 ## 1. Prerequisites 
 
@@ -81,3 +85,14 @@ The left is ours and the right is the original optical flow algorithm.
 <td><img src=assets/8.png border=0 width="260"></td>
 </tr></table>
 
+## 5. Cite
+
+```
+@misc{let-net,
+      title={Breaking of brightness consistency in optical flow with a lightweight CNN network}, 
+      author={Yicheng Lin and Shuo Wang and Yunlong Jiang and Bin Han},
+      year={2023},
+      eprint={2310.15655},
+      archivePrefix={arXiv}
+}
+```
