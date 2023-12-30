@@ -9,9 +9,12 @@ LET-NET implements an extremely lightweight network for feature point extraction
 </div>
 
 ## News 
-1. [LET-VINS](https://github.com/linyicheng1/LET-NET/blob/main/assets/VINS-Mono.zip) Demo run on UMA-VI dataset is released.
-2. Our proposed LET-VINS won the second place in the VIO track of the ICCV2023SLAM Challenge, which is the best performance among the traditional methods.
-3. The preprinted paper was posted at [here](https://arxiv.org/abs/2310.15655).
+
+1. [Training Code](https://github.com/linyicheng1/LET-NET/blob/main/assets/LETNet.zip) The LET-NET training code is released.
+2. Gray Image is also suport in LET-NET, you can get pytorch and onnx model tpye in `./model/`
+3. [LET-VINS](https://github.com/linyicheng1/LET-NET/blob/main/assets/VINS-Mono.zip) Demo run on UMA-VI dataset is released.
+4. Our proposed LET-VINS won the second place in the VIO track of the ICCV2023SLAM Challenge, which is the best performance among the traditional methods.
+5. The preprinted paper was posted at [here](https://arxiv.org/abs/2310.15655).
 
 <img src=https://github.com/linyicheng1/LET-NET/assets/50650063/f4e96620-925e-4ff8-a2a9-c8af202c3b99 border=10 width=40%>
 
