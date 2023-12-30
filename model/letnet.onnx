@@ -1,0 +1,372 @@
+pytorch2.0.1:‰Ù
+µ
+input.1
+onnx::Conv_35
+onnx::Conv_36/block1/conv1/Conv_output_0/block1/conv1/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@@@@†*
+strides@@†2ˆ/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(459): _conv_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(463): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(49): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(166): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+«
+/block1/conv1/Conv_output_0/block1/gate/Relu_output_0/block1/gate/Relu"Relu2Ú/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/functional.py(1455): relu
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/activation.py(103): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(49): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(166): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+»
+/block1/gate/Relu_output_0
+onnx::Conv_38
+onnx::Conv_39/block1/conv2/Conv_output_0/block1/conv2/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@@@@†*
+strides@@†2ˆ/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(459): _conv_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(463): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(50): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(166): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+À
+/block1/conv2/Conv_output_0/block1/gate_1/Relu_output_0/block1/gate_1/Relu"Relu2Ú/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/functional.py(1455): relu
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/activation.py(103): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(50): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(166): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+è
+/block1/gate_1/Relu_output_0
+conv1.weight/conv1/Conv_output_0/conv1/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@ @ @ @ †*
+strides@@†2Ÿ/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(459): _conv_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(463): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(167): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+ï
+/conv1/Conv_output_0/gate/Relu_output_0
+/gate/Relu"Relu2’/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/functional.py(1455): relu
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/activation.py(103): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(167): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+í
+/gate/Relu_output_0
+conv_head.weight/conv_head/Conv_output_0/conv_head/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@ @ @ @ †*
+strides@@†2Ÿ/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(459): _conv_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/conv.py(463): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(169): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+E/Constant_output_0	/Constant"Constant*
+value*J       †2 
+Å
+/conv_head/Conv_output_0
+/Constant_output_0/Gather_output_0/Gather"Gather*
+axis†2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(170): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+€
+
+/Gather_output_0/Sigmoid_output_0/Sigmoid"Sigmoid2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(170): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+ﬁ
+
+/Sigmoid_output_027
+/Unsqueeze"	Unsqueeze*
+axes@†2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(170): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+Ï
+/Constant_1_output_0/Constant_1"Constant*
+value*J       †2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+Ï
+/Constant_2_output_0/Constant_2"Constant*
+value*J        †2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+Ï
+/Constant_3_output_0/Constant_3"Constant*
+value*Jˇˇˇˇˇˇˇˇ†2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+Ï
+/Constant_4_output_0/Constant_4"Constant*
+value*J       †2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+µ
+/conv_head/Conv_output_0
+/Constant_2_output_0
+/Constant_3_output_0
+/Constant_1_output_0
+/Constant_4_output_0/Slice_output_0/Slice"Slice2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+
+Õ
+
+/Slice_output_033
+/Sigmoid_1"Sigmoid2†
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(171): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1488): _slow_forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/nn/modules/module.py(1501): _call_impl
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/jit/_trace.py(1268): _get_trace_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(893): _trace_and_get_graph_from_model
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(989): _create_jit_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1113): _model_to_graph
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(1548): _export
+/home/server/wangshuo/ALIKE_code/py38/lib/python3.8/site-packages/torch/onnx/utils.py(506): export
+/home/server/wangshuo/ALIKE_code/nets/alnet.py(318): <module>
+	torch_jit*õBconv1.weightJÄGŸ->N3'Ωèû=‹¨µ=oıÅΩrT7>É`À>¬zÃæqØ;∏?FÓøà∫çæú‚3>n’‰>HXïΩ|≈ø0 äæ-W°æGq>F«ø'¬æ“9«>ëµ=wma>Fô˚=)≠>	
+X=˘À>ﬁA¨Ω£;+>Æ¥aæz˜$=⁄B—Ω˚´æeâ°Ω¸äΩ¸MÎº°Pæó¥æM&˚ºuÇ>*≠ ?ÕÄêæ<„=•ı∑>~¢≤<èÑ÷=‰'>ù£Ω∏£"æùº"wïæf1´æî0Ωp∑Ω8æ¸È">ÙPÖ=|	4æ∂h>ﬂ1Ω‹0“>_’éæ≤!æ‹õ>d}Iæ?F_æC4‰>Ì≥>‰Òyæ‡Ÿl>°
+º=ùöæhü=Œ4ΩôpΩ„7=çVçΩ
+‹Éæ#◊ﬂ>cÀ>ƒG =ÀÁÜæ >ñÄu>Èw=Å <æüÕΩôº8F·ºm*)æÃ–ﬁ=êﬁ‡>O¡uª_Àæ·|úºƒõæÍ"π=êæõ>®ä®æÁøf◊’>Peæ2ÓΩehp>ô~%=πÇ™=/>ceﬂ=í›>0¨å>ìÂ>)ƒ$º‰˝Ö>9\X=¸T"æn<Ø£Ω ©Ô<Ù+°>	>Ëpw>°≤Ω|¿Ô>I	d>$ΩÑæ›ÀÂ>tZıΩ*üBconv_head.weightJÄqÙ”æ__ºΩîwäæì†‚>Äeë=}¿±>Dà…={jsΩ;±ä<"≥=2ãÈºì<É>UΩ?œ≤ÃækSªãüÜæˆü∂æ#ªø®DÏ=XìRæp'Ω$“wæ†r˝Ω∆y–æK>¨ÎΩÁëiæÂã…Ωy'6=‡x}>ú.3=&ˆæ"‰>¿à>Ovyæÿ+∑æÄﬁÌΩ=H˚ΩˆÊΩï± =ƒ<≥æ
+u^ø9.π>åœz>hœ¯=—ıæ@P£ælwZ>˙¢-æ^Æø'€ü?£ìàøli<æ°~Ôøò6>zW÷ø”¨c¿åÆÄø™\x¿ë	^¿≥5@˚w∞æi ¡æÃ‡ø*¸Bonnx::Conv_35J‡∑Zäæ‘"¿Éû¿ç˜4øCùÁ>aœè? ∏ã?¶[?€ç@˝¯;?yS!¿q>í>ê!˚ø∑À?+Mî>Pÿé?◊„“?pææQaΩˆœY¿¢ºG>ûà?¨E¿‹	?Ì¶?U@˙OÜ?
+ƒ“?äø`∂P?Ï_WΩ™d=?†◊¿
+ﬂ=>
+ªì>ƒO)ø=Üª?öçÔ?fq“>?6¿Sºzôt?|zçø^∏¿aË¿€»@aâ?)ü®?5#j?ıπø¸?¿V»ÿ>$iø‡Øòæ#U«æèè,º&‰5?µ.¶?ø≥h@E¡¸?E¢´øuZå¿tÔ≈ø“ç?'˝Å?+øg∆Tø7ç?{w@éY„?Ö˘?¿W{É¿g1=E@“:ø˝≈æ/π@©ë?e„¿øá‚6¿∆QæÍ:≠¿e¡9¿ò^¡òÍÜ@ÅYª¿b~õ?≈≠æ?Ò≥Ú@Í[	Ae
+ı?˙∂?ˆÈ€ø_⁄»¿AèAÛ«*¿ô]î?˝…ç¿Sì@ºz@e◊-@≥õ5A“Œ›?mø¿∆ªe?ÜAY¿âï¿ÄV¡;m∆æ><s˘æ/œ8øW8x>™‡j=8¬Ñ>+=@b
+æ…J†=ÕÚ;h`º &>NK%>)‘_=µlææ#ﬂ’Ω±˛>¸≠>≤2Í=5˚ﬂ>ñ¡)?òúj>ñ¿?∆p>Îd
+?Ayÿ>Ò±?Œçæ±¿∏?Ÿ¸°>\9?úL∏øPÁ\ø»ÉæF˜køV∞Ÿ>ômª>X=™£øæâoﬂøEÈ{>Q»C?‘«l>	]ÈæIúàø-Wë=⁄·ôæ˘°?®øÉ*ØøÔ=&øV?âœÄæ†õJ>øWH?g·¿‚•ã??Ûø–ÃÃ>*ÄÖ?Ê◊|?√™øFà°?èù†??¿[G_?¿o¿{õ–øqIL@mÚ÷æ\*º¿±ï>ÚoøçjπæáRç?Úí?cC¿§c?
+˜Ë;qˆA?;˘Q?˙é?V„?ëπÉø¡©¿~*Ë?Á÷?Í∂÷?—›∏?vI∏>ù+>n77@ªÜ>)™a¿ÆbŒ?ÌCø¶MøΩü∆æ/ @ÄˇñøaÄ?yID¿j¿Ë’T>√O®>j°®ø:>@*5Bonnx::Conv_36J óI7?¯X-?2Ú=¢æ¸Wéø‘≤?ê*?Ì5?*úBonnx::Conv_38JÄ°çX<À%˝Ω±ˇ”º(å)=n8EæQ∏π<!mªÅóΩÄö¢=ÕU»º&>¿=ËÙQ=¡qŸ<\nÏ='˝÷=˜b—;⁄I∑=ñS>ÊŸºY
+^æKÃ–ΩH¿*ΩoΩN∏æ˝ÅXº¿™VΩÚVΩ"=“PΩ•´º  ì<◊éΩBßºy‚+;Õµπﬁ≥2ºõ‹=∞πu=,o£<Ef8=ò^Ωq>¢ΩGîË<Ü≥ªûP ;€ZÁΩ£?é=F+LΩñcº·==é§¨ºhM<…Õ∫º˝Ûº/â>P=_ó>eC9Ωü=V˘w>Ω5<®‡áºÈ±˘=+d=	QæÄY•º⁄Áö=ÀıΩdÏπ<ü6ΩêÈÅ=ÕÅΩ≠X§=—˘>˛Sˆ=iù#ΩâÆ>L H=ÊG$>êÑ≤ºa≥>í=æNC·ªC¡Ω‰ÎòΩhPMæO≈ÜæMÑÖªp0=∂·!æEËRΩ|ß5Ω†QâºKí¶<\J <2<≈ΩÙù›Ωä»›º"ì!æ}qÀºrÁª<d_ºˆ<„jºΩΩÔÅ*ΩáçÖ<F%xºf2ŸΩ‰ ¥Ω^Yaæ∆¢<›6è=õµ=≈™= …Ë=¸Æ>´0¢=D+	>ıTº=7º‘∑ÑΩ¡ÏÖΩ¨sæ˝ì.ΩbºÖΩañΩ◊)ºƒWì<r)>ª|º}T=ø◊ÇΩß!1ΩÊmΩo^ì;Ï´—º§Ò÷ºçênΩÕÛΩˇ‘˜Ω¥°Ω◊ŒÔΩóx◊Ω˜Gº£>7Î;¬ä+=«‘øuMBæl+âæ
+ˇ&>Exˆº*›ΩD9Åºæ	>Ë#>∆tÁ=È‚U=¨éÚªYƒ≠ΩèÂº°ˇ¢=é)@>Ôg>ú‡æüï2>'Û√º>ı= ≤Ωˆ~Àª%GqΩX¨º∑K©<T6=¥_≠=B±å;∆ÆΩºEhΩ=›ª≠;<=4ƒªã›Tæ‰üÈΩ≤ç
+>5ÆãºëÙ2=∏±ºt+œ=ü˜g<¡zæ<ƒ˚º2+æü‹$æ‹-Ú<úß4>j\>ü7>: æÙëƒæË≥º|h=∂>0víΩÄÊ∏=?Q>^â`Ω¡°7<BæåæÅ∂/æûzæ•/ÒºıQ9>7∞=0Û≤>Ù‘∂=Á∂º<D{2=¢nìªÛ√O<nˆ>ÔO¢Ωeàº¶=‘Ω~Æº–6Ωä¢ÌΩÆ=ˆ<c<8Ω˛¶]Ω ˆóº·≤Ω%Ì:Ω6»wºÑÑΩN®èΩqØÜ<pMôΩÒ#FΩ*q=SpV<hS=MSÌª©WêºûgΩ|x <ûûΩj\ΩïxAºX¿Œ;√ïéº«ìÄºœﬂ;ΩËéò<'=ô±¢ΩÛ¬H;èu=1kæπz=3]¸º°EüΩTnÄº[jÁºéﬁÅ=ƒ˛º¸Ç=¬¯©∫}dÎ;6ΩIΩ∏Ñ@<õ9(;òô<s2VΩ|èıΩ#E8ºN!‚;ß‡IΩe<—9)=ë‰<Ù»'= ¢®=ó`=W¶s=ÛÜ2=7Wß=l==A!=É$8=T?È=T≤ÇΩù?+Ω+f>{3â8*ƒ›<†=Ãz˜Ω=}L=∫¬<‰Æ.æ ≥=ô“t=Ú{Øæ°ÁD<èb\>õnúΩµü<ﬁnX>«Õ=ÍH(Ω
+Œq=7¨<W¸ºπ_=i*Ωƒªº∞ßá=ôk	;≤g†º≈ìä<Ì°∂;JˆVº@Ú°Ω#s€=¶‘ö=y¯Ω&„ºµ
+⁄=+=]¡ÉΩ‰W>ì€øºb`#æÙÜq=s>BF·=øöΩÊ!>=eàΩú|äº¯6íææ&Á‡<ß∆´Ω*Ôëæµb=ÍIæÄœÀæàÇΩvûÆΩ3'∞=ÖbAΩÖä£ºI•&Ω·‘=ΩQ2>L«™Ω‘Ô<[‚ÏΩ88˘Ω⁄˜5ΩG5¸ΩGGæ“◊æcû°º˝pæcOÙΩm…ü=ÀíW=kî)=(fEº¡C†<l¶=i¡M<¡∏<6åj=lEñΩiXÛº˙Ú'ΩíÅZºÃË‘º4µúºäkùΩNb;f  <~äºBÍ¬;ŸJªâè®ª≥©ºT%æ<ú˝ºD3;ª_c∫;°m9(≥ª⁄öû=i◊;ò-*<[sª2
+;û"=Ω˜˚(Ωº#ΩÂ»Ω_ΩAº˛˘º¢]√º4f”<Êƒ¥ºMíº<áWºáBºE6GΩÙ:æ}>ÓºçÕ‡ºo…æ”eº[’OΩoΩzVÙªb·ºΩı≤<ˆ8=Úƒ«<r¯
+Ωz!Êºc“å<ı∆=Ì6#<€ûºÆè=˝˘Ω3gN:O8≤º~º¥=*ÈÊ:;>™bv=F∫+>mv=A8—Ï<ÇŒ]=≤˛w=éD"=6>A∆=å)Ó=â·>dÛø=å…=µŸ">≈À—º+m—=Ib=TÙÄ=!∏µ=‰Áá=ƒWÉ=uD9=gÄù=∂&E=“ı]=ü®Æ=™¿≈=mPÛ=+Y≠;N¸/:ƒ_>ÁN5=8„IΩ
+ﬂ‚ª#Ù√Ω˚mKΩ§ó‰<˘ƒùΩ¥…ÖΩt–Ω$;b<x„Ωf<À˙;‘‘}Ωêˇ\Ω‹+fΩÜ¥~º∆∂fΩîp»Ω«k⁄;≈U‹;>s/ΩKA=æé=4ãIºqÇΩë¶ÈºUW˛<ºq˚ªQIΩÉî<íó<é?⁄;‚;b}<W`j=NY◊<íí\=¿çÜ=ñ<ƒLº»zºÍ®∏º¨¡O=/hºÖs%ªﬂvc=›7mºO£=DLd=K<Ÿæâ=?€D=ó6<='X=ê<·º°?=‡/Z=Ù=ª˙Û<G[=˛Âª¥uPºîh©<+Æ=kâW=	}˜Ω˘€ˆΩ*ÒïΩ4dΩ	0TΩWSΩç)';ﬂ(9Ωè€Ù;ï≤~>ﬁnJ>wD|>bÓ>˜g>k>ãd;>≈∂>¬p>¡˜∏<∞ÊÊºΩ&óºMwcΩÂ‡tπa?ﬂ<Yèk<ÏÎ5<K6z=?◊<ã¿H:Ïf1:2Ñ˚<2ÄñºÕ¥ºæ≠£ºªî·º¥ÏëΩ*5Bonnx::Conv_39J æ>^≥ä?N£¨>s∂?d~ö?6q@yë>(()?Z#
+input.1
+
+
+
+¿
+b
+27
+
+
+
+¿
+b
+33
+
+
+
+¿
+B
