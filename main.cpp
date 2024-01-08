@@ -6,8 +6,8 @@
 using namespace  std;
 int main()
 {
-	const char* superpoint_model_name = "../model/mnn/model640*480.mnn";
-	Net net = Net(superpoint_model_name);
+	const char* model_name = "../model/mnn/model640*480.mnn";
+	Net net = Net(model_name);
 	cv::VideoCapture cap;
 	cap.open(0);
 	if (!cap.isOpened())
@@ -20,9 +20,9 @@ int main()
 	{
 		cap >> img;
 		cv::Mat image = img;
-		if (image.empty())
-			cout<<"images input error! check please."<<endl;
-		
+		if (image.empty()) {
+			cout << "images input error! check please." << endl;
+		}
 		cv::resize(image, image, cv::Size(640, 480), 0, 0);
 		TicToc a;
 		net.Inference(image);  //推理
@@ -39,7 +39,6 @@ int main()
 				hot_pic.at<uchar>(i,j) = hotmap_index[i*imag_w+j]*255;
 			}
 		}
-		// cv::imshow("2",hotPic);
 		const auto* descriptors_index = (const float*) descriptors->buffer().host;
 		cv::Mat des(cv::Size(640,480), CV_8UC3,cv::Scalar(0));
 		imag_w = des.size[1];
@@ -51,8 +50,9 @@ int main()
 			}
 		}
 		std::cout <<" ======================="<<  a.toc() <<std::endl;
-		// cv::imshow("4",Des);
-		// cv::imshow("input", image);
+		cv::imshow("2",hot_pic);
+		cv::imshow("4",des);
+		cv::imshow("input", image);
 		cv::waitKey(1);
 	}
 }

@@ -7,14 +7,14 @@
 #include<MNN/ImageProcess.hpp>
 class Net{
     private:
-        std::shared_ptr<MNN::Interpreter> net = nullptr;
-        MNN::ScheduleConfig config;
-        MNN::Session *session = nullptr;
-        MNN::BackendConfig backendConfig;
+        std::shared_ptr<MNN::Interpreter> net_ = nullptr;
+        MNN::ScheduleConfig config_;
+        MNN::Session *session_ = nullptr;
+        MNN::BackendConfig backend_config_;
         /*MNN 后端配置*/
-        std::string scoresOutName = "score";
-        std::string keypointsOutName = "keypoints";
-        std::string descriptorsOutName = "descriptor";
+        std::string scores_out_name_ = "score";
+        std::string keypoints_out_name_ = "keypoints";
+        std::string descriptors_out_name_ = "descriptor";
     public:
         Net();
         explicit Net(const char* modelPath);
