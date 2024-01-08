@@ -1,5 +1,7 @@
 #include "net.hpp"
 #include <memory>
+#include <opencv2/dnn/dnn.hpp>
+
 Net::Net()= default;
 Net::~Net()= default;
 
@@ -14,21 +16,19 @@ Net::Net(const char* modelPath){
     this->session_ = this->net_->createSession(this->config_);
 }
 void Net::Mat2Tensor(const cv::Mat& image){
-    cv::Mat pre_image = image.clone();
-    pre_image.convertTo(pre_image,CV_32FC3,1/255.);
+	cv::Mat pre_image;
+	image.convertTo(pre_image, CV_32FC3, 1/255.0);
     std::vector<cv::Mat> bgr_channels(3);
     cv::split(pre_image, bgr_channels);
-    std::vector<float> chw_image;
-    for (const auto & bgr_channel : bgr_channels)
-    {  
-        //HWC->CHW
-        std::vector<float> data = std::vector<float>(bgr_channel.reshape(1, pre_image.cols * pre_image.rows));
-        chw_image.insert(chw_image.end(), data.begin(), data.end());
-    }
-    auto in_tensor = net_->getSessionInput(session_, nullptr);;
-    auto nchw_tensor = std::make_shared<MNN::Tensor> (in_tensor, MNN::Tensor::CAFFE);
-    ::memcpy(nchw_tensor->host<float>(), chw_image.data(), nchw_tensor->elementSize() * 4);
-    // const auto* hmap = (const float*)(nchw_tensor->buffer().host);
+	std::vector<float> chw_image;
+	chw_image.reserve(pre_image.cols * pre_image.rows * 3);
+	for (const auto &bgr_channel : bgr_channels) {
+		const auto* data = bgr_channel.ptr<float>();
+		chw_image.insert(chw_image.end(), data, data + bgr_channel.total());
+	}
+	auto in_tensor = net_->getSessionInput(session_, nullptr);
+	auto nchw_tensor = std::make_shared<MNN::Tensor>(in_tensor, MNN::Tensor::CAFFE);
+	::memcpy(nchw_tensor->host<float>(), chw_image.data(), chw_image.size() * sizeof(float));
     in_tensor->copyFromHostTensor(nchw_tensor.get());
 }
 void Net::Inference(const cv::Mat& image){

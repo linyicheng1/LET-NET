@@ -30,25 +30,23 @@ int main()
 		auto descriptors = net.GetDescriptorsValueOnly();
 		hotmap->host<float>();
 		vector<int> hotmap_shape(hotmap->shape()); //获取维度
-		
-		const auto* hotmap_index = (const float*) hotmap->buffer().host;
-		cv::Mat hot_pic(cv::Size(640,480), CV_8UC1,cv::Scalar(0));
+		const float* hotmap_index = hotmap->host<float>();
+		cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
 		int imag_w = hot_pic.size[1];
-		for(int i = 0 ; i<hot_pic.size[0] ;++i){
-			for(int j = 0 ; j<hot_pic.size[1] ; ++j){
-				hot_pic.at<uchar>(i,j) = hotmap_index[i*imag_w+j]*255;
-			}
-		}
-		const auto* descriptors_index = (const float*) descriptors->buffer().host;
-		cv::Mat des(cv::Size(640,480), CV_8UC3,cv::Scalar(0));
+		hot_pic.forEach<uchar>([&](uchar& pixel, const int* position) {
+			pixel = hotmap_index[position[0] * imag_w + position[1]] * 255;
+		});
+		
+		const float* descriptors_index = descriptors->host<float>();
+		cv::Mat des(cv::Size(640, 480), CV_8UC3, cv::Scalar(0));
 		imag_w = des.size[1];
-		for(int i = 0 ; i<des.size[0] ;++i){
-			for(int j = 0 ; j<des.size[1] ; j+=3){
-				des.at<cv::Vec3b>(i,j) = cv::Vec3b(descriptors_index[i*imag_w+j]*255,
-				                                   descriptors_index[i*imag_w+j+307200]*255,
-				                                   descriptors_index[i*imag_w+j+614400]*255);
-			}
-		}
+		des.forEach<cv::Vec3b>([&](cv::Vec3b& pixel, const int* position) {
+			int pixel_index = position[0] * imag_w + position[1];
+			int channel_offset = imag_w * 3;
+			pixel[0] = static_cast<uchar>(descriptors_index[pixel_index] * 255);
+			pixel[1] = static_cast<uchar>(descriptors_index[pixel_index + channel_offset] * 255);
+			pixel[2] = static_cast<uchar>(descriptors_index[pixel_index + channel_offset * 2] * 255);
+		});
 		std::cout <<" ======================="<<  a.toc() <<std::endl;
 		cv::imshow("2",hot_pic);
 		cv::imshow("4",des);
