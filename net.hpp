@@ -21,6 +21,6 @@ class Net{
         void Mat2Tensor(const cv::Mat& image);
         void Inference(const cv::Mat& image);
         std::shared_ptr<MNN::Tensor> GetScoresValue();
-        std::shared_ptr<MNN::Tensor> GetDescriptorsValueOnly();
+        std::shared_ptr<MNN::Tensor> GetDescriptorsValue();
         ~Net();
 };

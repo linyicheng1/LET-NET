@@ -27,14 +27,14 @@ int main()
 		TicToc a;
 		net.Inference(image);  //推理
 		auto hotmap = net.GetScoresValue();
-		auto descriptors = net.GetDescriptorsValueOnly();
+		auto descriptors = net.GetDescriptorsValue();
 		hotmap->host<float>();
 		vector<int> hotmap_shape(hotmap->shape()); //获取维度
 		const float* hotmap_index = hotmap->host<float>();
 		cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
 		int imag_w = hot_pic.size[1];
 		hot_pic.forEach<uchar>([&](uchar& pixel, const int* position) {
-			pixel = hotmap_index[position[0] * imag_w + position[1]] * 255;
+			pixel = static_cast<uchar>(hotmap_index[position[0] * imag_w + position[1]] * 255);
 		});
 		
 		const float* descriptors_index = descriptors->host<float>();
@@ -48,9 +48,9 @@ int main()
 			pixel[2] = static_cast<uchar>(descriptors_index[pixel_index + channel_offset * 2] * 255);
 		});
 		std::cout <<" ======================="<<  a.toc() <<std::endl;
-		cv::imshow("2",hot_pic);
-		cv::imshow("4",des);
-		cv::imshow("input", image);
-		cv::waitKey(1);
+		// cv::imshow("2",hot_pic);
+		// cv::imshow("4",des);
+		// cv::imshow("input", image);
+		// cv::waitKey(1);
 	}
 }

@@ -1,6 +1,5 @@
 #include "net.hpp"
 #include <memory>
-#include <opencv2/dnn/dnn.hpp>
 
 Net::Net()= default;
 Net::~Net()= default;
@@ -8,7 +7,7 @@ Net::~Net()= default;
 Net::Net(const char* modelPath){
     this->net_ = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
     this->backend_config_.precision =MNN::BackendConfig::Precision_High;
-    this->backend_config_.power = MNN::BackendConfig::Power_Normal;
+    this->backend_config_.power = MNN::BackendConfig::Power_High;
     this->backend_config_.memory = MNN::BackendConfig::Memory_High;
     this->config_.backendConfig = & this->backend_config_;
 	this->config_.mode = MNN_GPU_TUNING_FAST | MNN_GPU_MEMORY_IMAGE;
@@ -41,7 +40,7 @@ std::shared_ptr<MNN::Tensor> Net::GetScoresValue(){
     output->copyToHostTensor(output_tensor.get());
     return output_tensor;
 }
-std::shared_ptr<MNN::Tensor> Net::GetDescriptorsValueOnly(){
+std::shared_ptr<MNN::Tensor> Net::GetDescriptorsValue(){
      auto output= this->net_->getSessionOutput(this->session_, this->descriptors_out_name_.c_str());
     auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
     output->copyToHostTensor(output_tensor.get());
