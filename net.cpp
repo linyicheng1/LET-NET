@@ -16,9 +16,9 @@ Net::Net(const char* modelPath){
 }
 void Net::Mat2Tensor(const cv::Mat& image){
 	cv::Mat pre_image;
-	image.convertTo(pre_image, CV_32FC3, 1/255.0);
 	std::vector<float> chw_image;
 	if(image.channels() == 3) {
+		image.convertTo(pre_image, CV_32FC3, 1/255.0);
 		std::vector<cv::Mat> bgr(3);
 		cv::split(pre_image, bgr);
 		chw_image.reserve(pre_image.cols * pre_image.rows * 3);
@@ -28,6 +28,7 @@ void Net::Mat2Tensor(const cv::Mat& image){
 		}
 	}
 	if(image.channels() == 1){
+		image.convertTo(pre_image, CV_32FC1, 1/255.0);
 		chw_image.reserve(pre_image.cols * pre_image.rows);
 		const auto *data = image.ptr<float>();
 		chw_image.insert(chw_image.end(), data, data + image.total());
