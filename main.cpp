@@ -15,6 +15,8 @@ int main()
 		return -1;
 	}
 	cv::Mat img;
+	cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
+	cv::Mat des(cv::Size(640, 480), CV_8UC3, cv::Scalar(0));
 	while (true)
 	{
 		cap >> img;
@@ -28,18 +30,13 @@ int main()
 		auto hotmap = net.GetScoresValue();
 		auto descriptors = net.GetDescriptorsValue();
 		const auto* hotmap_index = (const float*) hotmap->buffer().host;
-		cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1);
-		for (int i = 0; i < hot_pic.rows; ++i) {
-			auto* row = hot_pic.ptr<uchar>(i);
-			const float* src = hotmap_index + i * hot_pic.cols;
-			for (int j = 0; j < hot_pic.cols; ++j) {
-				row[j] = (uchar)(src[j] * 255);
-			}
-		}
+		int imag_w = hot_pic.size[1];
+		hot_pic.forEach<uchar>([&](uchar& pixel, const int* position) {
+			pixel = static_cast<uchar>(hotmap_index[position[0] * imag_w + position[1]] * 255);
+		});
 		
 		const float* descriptors_index = descriptors->host<float>();
-		cv::Mat des(cv::Size(640, 480), CV_8UC3, cv::Scalar(0));
-		int imag_w = des.size[1];
+		imag_w = des.size[1];
 		int channel_offset = imag_w * 3;
 		des.forEach<cv::Vec3b>([&](cv::Vec3b& pixel, const int* position) {
 			int pixel_index = position[0] * imag_w + position[1];

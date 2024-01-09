@@ -17,13 +17,20 @@ Net::Net(const char* modelPath){
 void Net::Mat2Tensor(const cv::Mat& image){
 	cv::Mat pre_image;
 	image.convertTo(pre_image, CV_32FC3, 1/255.0);
-    std::vector<cv::Mat> bgr_channels(3);
-    cv::split(pre_image, bgr_channels);
 	std::vector<float> chw_image;
-	chw_image.reserve(pre_image.cols * pre_image.rows * 3);
-	for (const auto &bgr_channel : bgr_channels) {
-		const auto* data = bgr_channel.ptr<float>();
-		chw_image.insert(chw_image.end(), data, data + bgr_channel.total());
+	if(image.channels() == 3) {
+		std::vector<cv::Mat> bgr_channels(3);
+		cv::split(pre_image, bgr_channels);
+		chw_image.reserve(pre_image.cols * pre_image.rows * 3);
+		for (const auto &bgr_channel: bgr_channels) {
+			const auto *data = bgr_channel.ptr<float>();
+			chw_image.insert(chw_image.end(), data, data + bgr_channel.total());
+		}
+	}
+	if(image.channels() == 1){
+		chw_image.reserve(pre_image.cols * pre_image.rows);
+		const auto *data = image.ptr<float>();
+		chw_image.insert(chw_image.end(), data, data + image.total());
 	}
 	auto in_tensor = net_->getSessionInput(session_, nullptr);
 	auto nchw_tensor = std::make_shared<MNN::Tensor>(in_tensor, MNN::Tensor::CAFFE);
