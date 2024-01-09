@@ -7,7 +7,7 @@ Net::~Net()= default;
 Net::Net(const char* modelPath){
     this->net_ = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
     this->backend_config_.precision =MNN::BackendConfig::Precision_High;
-    this->backend_config_.power = MNN::BackendConfig::Power_High;
+    this->backend_config_.power = MNN::BackendConfig::Power_Normal;
     this->backend_config_.memory = MNN::BackendConfig::Memory_High;
     this->config_.backendConfig = & this->backend_config_;
 	this->config_.mode = MNN_GPU_TUNING_FAST | MNN_GPU_MEMORY_IMAGE;

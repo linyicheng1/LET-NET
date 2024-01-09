@@ -1,12 +1,11 @@
 #include "iostream"
-#include <MNN/ImageProcess.hpp>
 #include "opencv2/opencv.hpp"
 #include "net.hpp"
 #include "tic_toc.h"
 using namespace  std;
 int main()
 {
-	const char* model_name = "../model/mnn/model640*480.mnn";
+	const char* model_name = "../model/model640*480*3.mnn";
 	Net net = Net(model_name);
 	cv::VideoCapture cap;
 	cap.open(0);
@@ -41,10 +40,9 @@ int main()
 		const float* descriptors_index = descriptors->host<float>();
 		cv::Mat des(cv::Size(640, 480), CV_8UC3, cv::Scalar(0));
 		int imag_w = des.size[1];
-		
+		int channel_offset = imag_w * 3;
 		des.forEach<cv::Vec3b>([&](cv::Vec3b& pixel, const int* position) {
 			int pixel_index = position[0] * imag_w + position[1];
-			int channel_offset = imag_w * 3;
 			pixel[0] = static_cast<uchar>(descriptors_index[pixel_index] * 255);
 			pixel[1] = static_cast<uchar>(descriptors_index[pixel_index + channel_offset] * 255);
 			pixel[2] = static_cast<uchar>(descriptors_index[pixel_index + channel_offset * 2] * 255);
