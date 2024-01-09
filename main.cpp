@@ -5,7 +5,7 @@
 using namespace  std;
 int main()
 {
-	const char* model_name = "../model/letnet480x640x1.mnn";
+	const char* model_name = "../model/letnet_out.mnn";
 	Net net = Net(model_name);
 	cv::VideoCapture cap;
 	cap.open(0);

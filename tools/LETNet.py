@@ -75,8 +75,8 @@ if __name__ == '__main__':
         scores_map, local_descriptor = net(image)
     # 保存模型
     # torch.save(net, 'letnet.pt')
-    # 转换成onnx模型
-    torch.onnx.export(net, torch.randn(1, 1, 640, 480), 'letnet_out.onnx', verbose=True, opset_version=11,output_names=['score','descriptor'])
+    # 转换成onnx模型(为什么这里是(480, 640)大小,不是((640, 480)).这里主要是onnx架构的问题)
+    torch.onnx.export(net, torch.randn(1, 1, 480, 640), 'letnet_out.onnx', verbose=True, opset_version=11,output_names=['score','descriptor'])
 
     cv2.imshow('local_descriptor',
                 (local_descriptor[0].cpu().permute(1, 2, 0).numpy() * 255).astype(np.uint8))
