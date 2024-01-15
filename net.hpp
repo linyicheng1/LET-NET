@@ -13,7 +13,6 @@ class Net{
         MNN::BackendConfig backend_config_;
         /*MNN 后端配置*/
         std::string scores_out_name_ = "score";
-        std::string keypoints_out_name_ = "keypoints";
         std::string descriptors_out_name_ = "descriptor";
     public:
         Net();

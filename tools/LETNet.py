@@ -27,6 +27,28 @@ class ConvBlock(nn.Module):
         return x
 
 
+# class LETNet(nn.Module):
+#     def __init__(self, c1: int = 8, c2: int = 16, grayscale: bool = False):
+#         super().__init__()
+#         self.gate = nn.ReLU(inplace=True)
+#         # ================================== feature encoder
+#         if grayscale:
+#             self.block1 = ConvBlock(1, c1, self.gate, nn.BatchNorm2d)
+#         else:
+#             self.block1 = ConvBlock(3, c1, self.gate, nn.BatchNorm2d)
+#         self.conv1 = resnet.conv1x1(c1, c2)
+#         # ================================== detector and descriptor head
+#         self.conv_head = resnet.conv1x1(c2, 4)
+#
+#     def forward(self, x: torch.Tensor):
+#         # ================================== feature encoder
+#         x = self.block1(x)
+#         x = self.gate(self.conv1(x))
+#         # ================================== detector and descriptor head
+#         x = self.conv_head(x)
+#         scores_map = torch.sigmoid(x[:, 3, :, :]).unsqueeze(1)
+#         local_descriptor = torch.sigmoid(x[:, :-1, :, :])
+#         return scores_map, local_descriptor
 class LETNet(nn.Module):
     def __init__(self, c1: int = 8, c2: int = 16, grayscale: bool = False):
         super().__init__()
@@ -38,7 +60,7 @@ class LETNet(nn.Module):
             self.block1 = ConvBlock(3, c1, self.gate, nn.BatchNorm2d)
         self.conv1 = resnet.conv1x1(c1, c2)
         # ================================== detector and descriptor head
-        self.conv_head = resnet.conv1x1(c2, 4)
+        self.conv_head = resnet.conv1x1(c2, 2)
 
     def forward(self, x: torch.Tensor):
         # ================================== feature encoder
@@ -46,15 +68,14 @@ class LETNet(nn.Module):
         x = self.gate(self.conv1(x))
         # ================================== detector and descriptor head
         x = self.conv_head(x)
-        scores_map = torch.sigmoid(x[:, 3, :, :]).unsqueeze(1)
+        scores_map = torch.sigmoid(x[:, -1, :, :]).unsqueeze(1)
         local_descriptor = torch.sigmoid(x[:, :-1, :, :])
         return scores_map, local_descriptor
-
 
 if __name__ == '__main__':
     import numpy as np
     net = LETNet(c1=8, c2=16, grayscale=True)
-    weight = torch.load('./letnet-gray.pt',map_location='cpu')
+    weight = torch.load('./letnet-only_gary.pth',map_location='cpu')
 
     net_dict = net.state_dict()
     pretrained_dict = {k: v for k, v in weight.items() if k in net_dict}

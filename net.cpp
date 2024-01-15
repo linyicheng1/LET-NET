@@ -8,7 +8,7 @@ Net::Net(const char* modelPath){
     this->net_ = std::shared_ptr<MNN::Interpreter>(MNN::Interpreter::createFromFile(modelPath));
     this->backend_config_.precision =MNN::BackendConfig::Precision_High;
     this->backend_config_.power = MNN::BackendConfig::Power_Normal;
-    this->backend_config_.memory = MNN::BackendConfig::Memory_High;
+    this->backend_config_.memory = MNN::BackendConfig::Memory_Normal;
     this->config_.backendConfig = & this->backend_config_;
 	this->config_.mode = MNN_GPU_TUNING_FAST | MNN_GPU_MEMORY_IMAGE;
     this->config_.type = MNN_FORWARD_OPENCL;
@@ -28,7 +28,6 @@ void Net::Mat2Tensor(const cv::Mat& image){
 		}
 	}
 	if(image.channels() == 1){
-		std::cout <<" one channel" <<std::endl;
 		image.convertTo(pre_image, CV_32FC1, 1/255.0);
 		chw_image.reserve(pre_image.cols * pre_image.rows);
 		const auto *data = pre_image.ptr<float>();
@@ -37,8 +36,6 @@ void Net::Mat2Tensor(const cv::Mat& image){
 	auto in_tensor = net_->getSessionInput(session_, nullptr);
 	auto nchw_tensor = std::make_shared<MNN::Tensor>(in_tensor, MNN::Tensor::CAFFE);
 	::memcpy(nchw_tensor->host<float>(), chw_image.data(), chw_image.size() * sizeof(float));
-	chw_image.clear();
-	chw_image.shrink_to_fit();
     in_tensor->copyFromHostTensor(nchw_tensor.get());
 }
 void Net::Inference(const cv::Mat& image){
