@@ -100,17 +100,18 @@ int main()
 		
 		Mat desc = cv::Mat(ssc_kp.size(), 32, CV_8U);
 		
-		GaussianBlur(des,           // 源图像
-		             des,           // 输出图像
+		GaussianBlur(des,                    // 源图像
+		             des,                   // 输出图像
 		             Size(7, 7),           // 高斯滤波器kernel大小，必须为正的奇数
 		             2,                    // 高斯滤波在x方向的标准差
 		             2,                    // 高斯滤波在y方向的标准差
 		             BORDER_REFLECT_101);  // 边缘拓展点插值类型
-					 
+		//
 		computeDescriptors(des,  // 高斯模糊之后的图层图像
 		                   ssc_kp,   // 当前图层中的特征点集合
 		                   desc,        // 存储计算之后的描述子
 		                   pattern);    // 随机采样点集
+	   // std::cout <<desc <<std::endl;
 		if(!last_keypoint.empty() && !last_desc.empty())
 		{
 			// std::cout <<"last  not  empty "<<std::endl;
@@ -137,6 +138,6 @@ int main()
 		cv::imshow("des",des);
 		cv::imshow("out",out);
 		
-		cv::waitKey(20);
+		cv::waitKey(-1);
 	}
 }
