@@ -16,7 +16,14 @@ using namespace cv;
 		return nullptr; // 当输入的坐标超出范围时返回空指针
 	}
 }
+bool compareKeyPoints(const cv::KeyPoint& kp1, const cv::KeyPoint& kp2) {
+	return kp1.response > kp2.response;
+}
 
+std::vector<cv::KeyPoint> sortFeaturePoints(std::vector<cv::KeyPoint>& featurePoints) {
+	std::sort(featurePoints.begin(), featurePoints.end(), compareKeyPoints);
+	return featurePoints;
+}
 
 
 int main()
@@ -37,7 +44,7 @@ int main()
 		return -1;
 	}
 	cv::Mat img;
-	cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
+	cv::Mat hot_pic(cv::Size(640, 480), CV_32FC1);
 	// cv::Mat des(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
 	while (true)
 	{
@@ -63,33 +70,36 @@ int main()
 		
 		const auto* hotmap_index = (const float*) hot_map->buffer().host;
 		int imag_w = hot_pic.size[1];
-		hot_pic.forEach<uchar>([&](uchar& pixel, const int* position) {
-			pixel = static_cast<uchar>(hotmap_index[position[0] * imag_w + position[1]]  *  255);
+		hot_pic.forEach<float>([&](float & pixel, const int* position) {
+			pixel = (hotmap_index[position[0] * imag_w + position[1]]);
+			// std::cout <<" " << pixel;
 		});
+		// cv::GaussianBlur(hot_pic, hot_pic, cv::Size(3, 3), 5);
 		std::vector<cv::KeyPoint> key_points;
 		key_points.reserve(640*480);
 		// 遍历每个位置，并根据hotmap_index计算关键点位置
 		for (int i = 0; i < 480; i++) {
 			for (int j = 0; j < 640; j++) {
 				float hotmap_value = hotmap_index[i * 640 + j] ;
-				if (hotmap_value > 1./255) {
-					key_points.emplace_back(j,i,7,-1,hotmap_value*255); // 将Point对象添加到key_points向量中
+				if (hotmap_value > 10./255) {
+					key_points.emplace_back(j,i,7,-1,hotmap_value); // 将Point对象添加到key_points向量中
 				}
 			}
 		}
+		std::vector<cv::KeyPoint> sorted_feature_points = sortFeaturePoints(key_points);
+		std::cout <<"sortedFeaturePoints.size() " <<key_points.size() <<std::endl;
 		auto* descriptors_index =(float*) descriptors->buffer().host;
 		TicToc b;
 		vector<cv::KeyPoint> ssc_kp =
-				ssc(key_points, 1000, 0.2, 640, 480);
+				topN(sorted_feature_points, 1000);
 		
-		Mat desc(ssc_kp.size(), 64, CV_32F); // 每个描述子有 64 个通道
-		for (size_t i = 0; i < ssc_kp.size(); i++) {
-			auto const &kp = ssc_kp[i];
-			float* channel_data = GetChannelData(descriptors_index, 640, 480, kp.pt.x, kp.pt.y);
+		Mat desc;
+		for (const auto & kp : ssc_kp) {
+				float* channel_data = GetChannelData(descriptors_index, 640, 480, kp.pt.x, kp.pt.y);
 			cv::Mat des(1, 64, CV_32F, channel_data);
-			// cv::normalize(des,des);
+			cv::normalize(des,des, 1, cv::NORM_L2);
 			// 将描述子的每个通道数据存放在desc的每一行中
-			des.row(0).convertTo(desc.row(i), CV_32F);
+			desc.push_back(des);
 		}
 		// std::cout <<desc <<std::endl;
 		std::cout <<"kepoints.size() " <<ssc_kp.size() <<std::endl;
@@ -102,7 +112,7 @@ int main()
 		if(!last_keypoint.empty() && !last_desc.empty())
 		{
 			// std::cout <<"last  not  empty "<<std::endl;
-			cv::BFMatcher matcher = cv::BFMatcher(cv::NORM_L1);
+			cv::BFMatcher matcher = cv::BFMatcher(cv::NORM_L2);
 			std::vector<std::vector<cv::DMatch>> matches;
 			matcher.knnMatch(last_desc, desc, matches, 2);
 			std::vector<cv::DMatch> good_matchs;
@@ -112,6 +122,20 @@ int main()
 					good_matchs.push_back(matche[0]);
 				}
 			}
+			
+			//
+			// float matchThreshold = 0.1; // 设置匹配阈值
+			// std::vector<cv::DMatch> matches;
+			// matcher.match(last_desc, desc, matches);
+			// std::vector<cv::DMatch> good_matchs;
+			// for (const cv::DMatch& match : matches) {
+			// 	if (match.distance < matchThreshold) {
+			// 		good_matchs.push_back(match);
+			// 	}
+			// }
+			
+			
+			
 			std::cout <<" last_keypoint.size() :"<<last_keypoint.size() <<std::endl;
 			std::cout <<" last_desc    .size() :"<<last_desc.size <<std::endl;
 			std::cout << "good_matchs:" << good_matchs.size() << std::endl;
@@ -123,10 +147,10 @@ int main()
 		last_desc = desc;
 		last_image =image;
 		// std::cout <<" ======================="<<  a.toc() <<std::endl;
-		// cv::imshow("hot_pic",hot_pic);
+		cv::imshow("hot_pic",hot_pic);
 		// cv::imshow("des",des);
 		cv::imshow("out",out);
 		
-		cv::waitKey(20);
+		cv::waitKey(10);
 	}
 }

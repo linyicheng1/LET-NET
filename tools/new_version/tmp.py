@@ -1,3 +1,4 @@
+import cv2
 import torch
 from torch import nn
 from torchvision.models import resnet
@@ -206,34 +207,79 @@ class ALNet(nn.Module):
         scores_map = torch.sigmoid(head[:, -1, :, :]).unsqueeze(1)
         return scores_map, descriptor_map
 
+#
+# if __name__ == '__main__':
+#     import cv2
+#     import numpy as np
+#     net = ALNet(c1=8, c2=16, c3=32, c4=64, dim=64,
+#                 agg_mode='cat',
+#                 single_head=True,
+#                 pe=False,
+#                 grayscale=True)
+#
+#     weight = torch.load('./model.pt',map_location='cpu')
+#     net.load_state_dict(weight)
+#
+#     net.eval()
+#     #
+#     image = cv2.imread('./img.png')
+#     cv2.imshow("原图",image)
+#     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#     image = cv2.resize(image, (640, 480))
+#     cv2.imshow("resize",image)
+#     image_tensor = torch.from_numpy(image).unsqueeze(0).unsqueeze(0).float() / 255.0
+#     image_tensor = image_tensor.permute(0, 1, 3, 2)
+#     with torch.no_grad():
+#         scores_map, local_descriptor = net(image_tensor)
+#
+#         # 转换成onnx模型(为什么这里是(480, 640)大小,不是((640, 480)).这里主要是onnx架构的问题)
+#     torch.onnx.export(net, torch.randn(1, 1, 480, 640), 'ALIKE.onnx', verbose=True, opset_version=11,output_names=['score','descriptor'])
+#
+#     cv2.imshow('scores_map', (scores_map[0, 0].cpu().numpy() * 255).astype(np.uint8))
+#     cv2.waitKey(-1)
 
 if __name__ == '__main__':
     import cv2
     import numpy as np
+    # 加载网络模型
     net = ALNet(c1=8, c2=16, c3=32, c4=64, dim=64,
                 agg_mode='cat',
                 single_head=True,
                 pe=False,
                 grayscale=True)
-
-    weight = torch.load('./model.pt',map_location='cpu')
+    weight = torch.load('./model.pt', map_location='cpu')
     net.load_state_dict(weight)
-
     net.eval()
-    #
-    image = cv2.imread('./img.png')
-    cv2.imshow("原图",image)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = cv2.resize(image, (640, 480))
-    cv2.imshow("resize",image)
-    image_tensor = torch.from_numpy(image).unsqueeze(0).unsqueeze(0).float() / 255.0
-    image_tensor = image_tensor.permute(0, 1, 3, 2)
-    with torch.no_grad():
-        scores_map, local_descriptor = net(image_tensor)
 
-        # 转换成onnx模型(为什么这里是(480, 640)大小,不是((640, 480)).这里主要是onnx架构的问题)
-    torch.onnx.export(net, torch.randn(1, 1, 480, 640), 'ALIKE.onnx', verbose=True, opset_version=11,output_names=['score','descriptor'])
+    # 打开相机
+    cap = cv2.VideoCapture(0)
 
-    cv2.imshow('scores_map', (scores_map[0, 0].cpu().numpy() * 255).astype(np.uint8))
-    cv2.waitKey(-1)
+    while True:
+        # 读取相机图像
+        ret, frame = cap.read()
+
+        # 转换颜色空间和尺寸
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        resized = cv2.resize(gray, (640, 480))
+
+        # 将图像转换为Tensor
+        image_tensor = torch.from_numpy(resized).unsqueeze(0).unsqueeze(0).float() / 255.0
+        image_tensor = image_tensor.permute(0, 1, 3, 2)
+
+        with torch.no_grad():
+            scores_map, local_descriptor = net(image_tensor)
+        print(local_descriptor.shape)
+        print(local_descriptor)
+        # 在窗口中显示结果
+        cv2.imshow('Frame', frame)
+        cv2.imshow('Scores Map', (scores_map[0, 0].cpu().numpy() * 255).astype(np.uint8))
+
+        # 按下'q'键退出循环
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # 释放相机资源和关闭窗口
+    cap.release()
+    cv2.destroyAllWindows()
+
 

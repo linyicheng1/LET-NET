@@ -1,6 +1,14 @@
 #include "net.hpp"
 #include <memory>
-
+int getRealDim(float* hostValue){
+	for(int i = 1; i < 5000; i++){
+		if(hostValue[i] == hostValue[0]){
+			if(i < 4999 && hostValue[i+1] == hostValue[0])
+				return i;
+		}
+	}
+	return 5000;
+}
 Net::Net()= default;
 Net::~Net()= default;
 
@@ -53,4 +61,7 @@ std::shared_ptr<MNN::Tensor> Net::GetDescriptorsValue(){
     auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
     output->copyToHostTensor(output_tensor.get());
     return output_tensor;
+}
+int Net::GetRealDim(float* scores){
+	return getRealDim(scores);
 }

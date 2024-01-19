@@ -22,4 +22,7 @@ class Net{
         std::shared_ptr<MNN::Tensor> GetScoresValue();
         std::shared_ptr<MNN::Tensor> GetDescriptorsValue();
         ~Net();
+	int realDim = -1;
+	//获取输出的实际维度值
+	int GetRealDim(float* scores);
 };
