@@ -225,6 +225,7 @@ if __name__ == '__main__':
     cv2.imshow("原图",image)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.resize(image, (640, 480))
+    cv2.imshow("resize",image)
     image_tensor = torch.from_numpy(image).unsqueeze(0).unsqueeze(0).float() / 255.0
     image_tensor = image_tensor.permute(0, 1, 3, 2)
     with torch.no_grad():

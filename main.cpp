@@ -3,36 +3,30 @@
 #include "tic_toc.h"
 #include "anms.h"
 #include "brief.h"
+#include "opencv2/features2d/features2d.hpp"
 using namespace std;
 using namespace cv;
+
+
+// 假设每个像素点的64个通道的数据都是按照顺序存储的
+ float * GetChannelData( float* p, int width, int height, int x, int y) {
+	if (x >= 0 && x < width && y >= 0 && y < height) {
+		return p + (y * width + x) * 64;
+	} else {
+		return nullptr; // 当输入的坐标超出范围时返回空指针
+	}
+}
+
+
+
 int main()
 {
-	const int npoints = 512;
-	const auto *pattern0 = (const Point *)bit_pattern_31_;
-	std::copy(pattern0, pattern0 + npoints, std::back_inserter(pattern));
-	std::vector<int> umax;
-	umax.resize(HALF_PATCH_SIZE + 1);
-	int v,                                                    // 循环辅助变量
-	v0,                                                   // 辅助变量
-	vmax = cvFloor(HALF_PATCH_SIZE * sqrt(2.f) / 2 + 1);  // 计算圆的最大行号，+1应该是把中间行也给考虑进去了
-	int vmin = cvCeil(HALF_PATCH_SIZE * sqrt(2.f) / 2);
-	const double hp2 = HALF_PATCH_SIZE * HALF_PATCH_SIZE;
-	for (v = 0; v <= vmax; ++v)
-	{
-		umax[v] = cvRound(sqrt(hp2 - v * v));
-	}
-	for (v = HALF_PATCH_SIZE, v0 = 0; v >= vmin; --v) {
-		while (umax[v0] == umax[v0 + 1]) ++v0;
-		umax[v] = v0;
-		++v0;
-	}
-	
 	vector<cv::KeyPoint> last_keypoint;
 	Mat last_desc;
 	Mat last_image;
 	cv::Size size(640, 480);
 	std::cout << size.width  <<size.height;
-	const char* model_name = "../model/letnet_out.mnn";
+	const char* model_name = "../model/ALIKE.mnn";
 	Net net = Net(model_name);
 	cv::VideoCapture cap;
 	cap.open("/home/moi/left_output_video.avi");
@@ -44,7 +38,7 @@ int main()
 	}
 	cv::Mat img;
 	cv::Mat hot_pic(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
-	cv::Mat des(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
+	// cv::Mat des(cv::Size(640, 480), CV_8UC1, cv::Scalar(0));
 	while (true)
 	{
 		cap >> img;
@@ -63,6 +57,10 @@ int main()
 		net.Inference(image);  //推理
 		auto hot_map = net.GetScoresValue();
 		auto descriptors = net.GetDescriptorsValue();
+		std::cout <<descriptors->size()<<std::endl;
+		hot_map->printShape();
+		descriptors->printShape();
+		
 		const auto* hotmap_index = (const float*) hot_map->buffer().host;
 		int imag_w = hot_pic.size[1];
 		hot_pic.forEach<uchar>([&](uchar& pixel, const int* position) {
@@ -79,52 +77,43 @@ int main()
 				}
 			}
 		}
-		const auto* descriptors_index =(const float*) descriptors->buffer().host;
-		imag_w = des.size[1];
-		des.forEach<uchar>([&](uchar& pixel, const int* position) {
-			pixel = static_cast<uchar>(descriptors_index[position[0] * imag_w + position[1]] * 255);
-		});
-		
+		auto* descriptors_index =(float*) descriptors->buffer().host;
 		TicToc b;
 		vector<cv::KeyPoint> ssc_kp =
-				ssc(key_points, 1000, 0.1, 640, 480);
+				ssc(key_points, 1000, 0.2, 640, 480);
 		
+		Mat desc(ssc_kp.size(), 64, CV_32F); // 每个描述子有 64 个通道
+		for (size_t i = 0; i < ssc_kp.size(); i++) {
+			auto const &kp = ssc_kp[i];
+			float* channel_data = GetChannelData(descriptors_index, 640, 480, kp.pt.x, kp.pt.y);
+			cv::Mat des(1, 64, CV_32F, channel_data);
+			// cv::normalize(des,des);
+			// 将描述子的每个通道数据存放在desc的每一行中
+			des.row(0).convertTo(desc.row(i), CV_32F);
+		}
+		// std::cout <<desc <<std::endl;
+		std::cout <<"kepoints.size() " <<ssc_kp.size() <<std::endl;
+		std::cout <<"desc    .size() "<<desc.size <<std::endl;
 		cv::Mat out;
 		cvtColor(image, out, cv::COLOR_GRAY2BGR);
 		for (const cv::KeyPoint& kp : ssc_kp) {
 			cv::circle(out, kp.pt, 1, cv::Scalar(0, 255, 0), -1); // 在图像上以绿色绘制半径为5的圆
 		}
-		computeOrientation(des,  // 对应的图层的图像
-		                   ssc_kp,    // 这个图层中提取并保留下来的特征点容器
-		                   umax);                  // 以及PATCH的横坐标边界
-		
-		Mat desc = cv::Mat(ssc_kp.size(), 32, CV_8U);
-		
-		GaussianBlur(des,                    // 源图像
-		             des,                   // 输出图像
-		             Size(7, 7),           // 高斯滤波器kernel大小，必须为正的奇数
-		             2,                    // 高斯滤波在x方向的标准差
-		             2,                    // 高斯滤波在y方向的标准差
-		             BORDER_REFLECT_101);  // 边缘拓展点插值类型
-		//
-		computeDescriptors(des,  // 高斯模糊之后的图层图像
-		                   ssc_kp,   // 当前图层中的特征点集合
-		                   desc,        // 存储计算之后的描述子
-		                   pattern);    // 随机采样点集
-	   // std::cout <<desc <<std::endl;
 		if(!last_keypoint.empty() && !last_desc.empty())
 		{
 			// std::cout <<"last  not  empty "<<std::endl;
-			cv::BFMatcher matcher = cv::BFMatcher(cv::NORM_HAMMING2);
+			cv::BFMatcher matcher = cv::BFMatcher(cv::NORM_L1);
 			std::vector<std::vector<cv::DMatch>> matches;
 			matcher.knnMatch(last_desc, desc, matches, 2);
 			std::vector<cv::DMatch> good_matchs;
-			
+
 			for(auto & matche : matches){
-				if(matche[0].distance < 0.75 * matche[1].distance){
+				if(matche[0].distance < 0.7 * matche[1].distance){
 					good_matchs.push_back(matche[0]);
 				}
 			}
+			std::cout <<" last_keypoint.size() :"<<last_keypoint.size() <<std::endl;
+			std::cout <<" last_desc    .size() :"<<last_desc.size <<std::endl;
 			std::cout << "good_matchs:" << good_matchs.size() << std::endl;
 			Mat matchimages;
 			drawMatches(last_image,last_keypoint,image,ssc_kp,good_matchs,matchimages);
@@ -134,10 +123,10 @@ int main()
 		last_desc = desc;
 		last_image =image;
 		// std::cout <<" ======================="<<  a.toc() <<std::endl;
-		cv::imshow("hot_pic",hot_pic);
-		cv::imshow("des",des);
+		// cv::imshow("hot_pic",hot_pic);
+		// cv::imshow("des",des);
 		cv::imshow("out",out);
 		
-		cv::waitKey(-1);
+		cv::waitKey(20);
 	}
 }
