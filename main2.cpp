@@ -21,36 +21,33 @@ Scalar RandomColor(int64 seed) {
 Mat ConnectPointVectorOut(const Mat &InputImageL, const Mat &InputImageR, vector<cv::KeyPoint> Vector_L,
                           vector<cv::KeyPoint> Vector_R) {
 	Size size((InputImageL.cols + InputImageR.cols), max(InputImageL.rows, InputImageR.rows));
-	cv::Mat OutputImage;
-	// OutputImage.create(size, CV_MAKETYPE(InputImageL.depth(), 3));
-	OutputImage.create(size, CV_8UC3);
-	OutputImage = Scalar::all(0);
-	Mat outImg_left = OutputImage(Rect(0, 0, InputImageL.cols, InputImageL.rows));
-	Mat outImg_right = OutputImage(Rect(InputImageL.cols, 0, InputImageR.cols, InputImageR.rows));
+	cv::Mat output_image;
+	output_image.create(size, CV_8UC3);
+	output_image = Scalar::all(0);
+	Mat out_img_left = output_image(Rect(0, 0, InputImageL.cols, InputImageL.rows));
+	Mat out_img_right = output_image(Rect(InputImageL.cols, 0, InputImageR.cols, InputImageR.rows));
 	if (InputImageL.channels() == 1) {
-		cvtColor(InputImageL, outImg_left, cv::COLOR_GRAY2BGR);
+		cvtColor(InputImageL, out_img_left, cv::COLOR_GRAY2BGR);
 	}
 	if (InputImageR.channels() == 1) {
-		cvtColor(InputImageR, outImg_right, cv::COLOR_GRAY2BGR);
+		cvtColor(InputImageR, out_img_right, cv::COLOR_GRAY2BGR);
 	}
-	InputImageL.copyTo(outImg_left);
-	InputImageR.copyTo(outImg_right);
-	putText(OutputImage, to_string(Vector_L.size()), Point2f(50, 50), 3, 2, RandomColor(cv::getTickCount()));
-	putText(OutputImage, to_string(Vector_R.size()), Point2f(InputImageL.cols + 50, 50), 3, 2,
+	InputImageL.copyTo(out_img_left);
+	InputImageR.copyTo(out_img_right);
+	putText(output_image, to_string(Vector_L.size()), Point2f(50, 50), 3, 2, RandomColor(cv::getTickCount()));
+	putText(output_image, to_string(Vector_R.size()), Point2f(InputImageL.cols + 50, 50), 3, 2,
 	        RandomColor(cv::getTickCount()));
 	
 	for (int i = 0; i < min(Vector_L.size(), Vector_R.size()); i = i + 10) {
-		Scalar colorNow = RandomColor(cv::getTickCount());
-		circle(OutputImage, Vector_L[i].pt, 4, colorNow, 1, LINE_AA);
-		circle(OutputImage, Point2f(Vector_R[i].pt.x + InputImageL.cols, Vector_R[i].pt.y), 4, colorNow, 1, LINE_AA);
-		line(OutputImage, Vector_L[i].pt, Point2f(Vector_R[i].pt.x + InputImageL.cols, Vector_R[i].pt.y), colorNow, 1,
+		Scalar color_now = RandomColor(cv::getTickCount());
+		circle(output_image, Vector_L[i].pt, 4, color_now, 1, LINE_AA);
+		circle(output_image, Point2f(Vector_R[i].pt.x + InputImageL.cols, Vector_R[i].pt.y), 4, color_now, 1, LINE_AA);
+		line(output_image, Vector_L[i].pt, Point2f(Vector_R[i].pt.x + InputImageL.cols, Vector_R[i].pt.y), color_now, 1,
 		     LINE_AA);
 		
 	}
-	return OutputImage;
+	return output_image;
 }
-
-
 // 假设每个像素点的64个通道的数据都是按照顺序存储的
 float *GetChannelData(float *p, int width, int height, int x, int y) {
 	if (x >= 0 && x < width && y >= 0 && y < height) {
@@ -60,12 +57,12 @@ float *GetChannelData(float *p, int width, int height, int x, int y) {
 	}
 }
 
-bool compareKeyPoints(const cv::KeyPoint &kp1, const cv::KeyPoint &kp2) {
+bool CompareKeyPoints(const cv::KeyPoint &kp1, const cv::KeyPoint &kp2) {
 	return kp1.response > kp2.response;
 }
 
-std::vector<cv::KeyPoint> sortFeaturePoints(std::vector<cv::KeyPoint> &featurePoints) {
-	std::sort(featurePoints.begin(), featurePoints.end(), compareKeyPoints);
+std::vector<cv::KeyPoint> SortFeaturePoints(std::vector<cv::KeyPoint> &featurePoints) {
+	std::sort(featurePoints.begin(), featurePoints.end(), CompareKeyPoints);
 	return featurePoints;
 }
 
@@ -126,7 +123,7 @@ int main() {
 				}
 			}
 		}
-		std::vector<cv::KeyPoint> sorted_feature_points = sortFeaturePoints(key_points);
+		std::vector<cv::KeyPoint> sorted_feature_points = SortFeaturePoints(key_points);
 		auto *descriptors_index = (float *) descriptors->buffer().host;
 		TicToc b;
 		vector<cv::KeyPoint> ssc_kp =
@@ -178,7 +175,6 @@ int main() {
 		std::cout << " =======================" << a.toc() << std::endl;
 		cv::imshow("hot_pic", hot_pic);
 		cv::imshow("out", out);
-		
 		cv::waitKey(1);
 	}
 }
