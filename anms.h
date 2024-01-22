@@ -13,7 +13,7 @@
 using namespace std;
 using namespace nanoflann;
 
-vector<cv::KeyPoint> topN(vector<cv::KeyPoint> keyPoints, int numRetPoints) {
+vector<cv::KeyPoint> TopN(vector<cv::KeyPoint> keyPoints, int numRetPoints) {
   vector<cv::KeyPoint> kp;
 	
   if(keyPoints.size() <numRetPoints) {

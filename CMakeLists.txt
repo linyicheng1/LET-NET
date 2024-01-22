@@ -18,7 +18,7 @@ target_link_libraries(demo
         ${OpenCV_LIBS}
         -fopenmp
         )
-add_executable(demo2 main2.cpp net.cpp)
+add_executable(demo2 main2.cpp net.cpp orb_extractor.cpp)
 target_link_libraries(demo2
     MNN
     MNN_Express
