@@ -42,7 +42,7 @@ void Net::Mat2Tensor(const cv::Mat& image){
 		chw_image.insert(chw_image.end(), data, data + pre_image.total());
 	}
 	auto in_tensor = net_->getSessionInput(session_, nullptr);
-	auto nchw_tensor = std::make_shared<MNN::Tensor>(in_tensor, MNN::Tensor::CAFFE);
+	auto nchw_tensor = std::make_shared<MNN::Tensor>(in_tensor, MNN::Tensor::TENSORFLOW);
 	::memcpy(nchw_tensor->host<float>(), chw_image.data(), chw_image.size() * sizeof(float));
     in_tensor->copyFromHostTensor(nchw_tensor.get());
 }
@@ -52,13 +52,13 @@ void Net::Inference(const cv::Mat& image){
  }
 std::shared_ptr<MNN::Tensor> Net::GetScoresValue(){
     auto output= this->net_->getSessionOutput(this->session_, this->scores_out_name_.c_str());
-    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
+    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::TENSORFLOW);
     output->copyToHostTensor(output_tensor.get());
     return output_tensor;
 }
 std::shared_ptr<MNN::Tensor> Net::GetDescriptorsValue(){
      auto output= this->net_->getSessionOutput(this->session_, this->descriptors_out_name_.c_str());
-    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::CAFFE);
+    auto output_tensor = std::make_shared<MNN::Tensor>(output, MNN::Tensor::TENSORFLOW);
     output->copyToHostTensor(output_tensor.get());
     return output_tensor;
 }
